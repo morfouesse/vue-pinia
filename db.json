@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "lastName": "truc",
+      "firstName": "jeremy",
+      "posts": [
+        {
+          "id": 1,
+          "title": "ca marcheeeeee !!!!",
+          "body": "ouep",
+          "createdIn": "2023-03-01 15:46:29"
+        },
+        {
+          "id": 2,
+          "title": "tesssssssstsss",
+          "body": "a",
+          "createdIn": "2023-02-17 10:21:38"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "lastName": "ange",
+      "firstName": "michèle",
+      "posts": [
+        {
+          "id": 1,
+          "title": "En avant",
+          "body": "ouep",
+          "createdIn": "2023-03-01 15:46:29"
+        },
+        {
+          "id": 2,
+          "title": "hooooooooooooo",
+          "body": "a",
+          "createdIn": "2023-02-17 10:21:38"
+        }
+      ]
+    }
+  ],
+  "profile": {
+    "name": "morfouesse"
+  }
+}
