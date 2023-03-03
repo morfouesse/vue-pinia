@@ -1,42 +1,37 @@
 {
-  "users": [
+  "posts": [
     {
-      "id": 1,
-      "lastName": "truc",
-      "firstName": "jeremy",
-      "posts": [
-        {
-          "id": 1,
-          "title": "ca marcheeeeee !!!!",
-          "body": "ouep",
-          "createdIn": "2023-03-01 15:46:29"
-        },
-        {
-          "id": 2,
-          "title": "tesssssssstsss",
-          "body": "a",
-          "createdIn": "2023-02-17 10:21:38"
-        }
-      ]
+      "id": 3,
+      "title": "ca marcheeeeee !!!!",
+      "body": "ouep",
+      "createdIn": "2023-03-01 15:46:29",
+      "image": "logo2.svg"
     },
     {
-      "id": 2,
-      "lastName": "ange",
-      "firstName": "michèle",
-      "posts": [
-        {
-          "id": 1,
-          "title": "En avant",
-          "body": "ouep",
-          "createdIn": "2023-03-01 15:46:29"
-        },
-        {
-          "id": 2,
-          "title": "hooooooooooooo",
-          "body": "a",
-          "createdIn": "2023-02-17 10:21:38"
-        }
-      ]
+      "id": 5,
+      "title": "tesssssssstsss",
+      "body": "a",
+      "createdIn": "2023-02-17 10:21:38"
+    },
+    {
+      "id": 6,
+      "title": "new80",
+      "body": "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+      "createdIn": "2023-03-01 15:46:16",
+      "image": "logo.svg"
+    },
+    {
+      "title": "231321",
+      "body": "4545",
+      "createdIn": "2023-03-01 16:35:48",
+      "image": "",
+      "id": 7
+    },
+    {
+      "title": "fhgfhg",
+      "body": "fggh",
+      "createdIn": "2023-03-02 09:21:09",
+      "id": 8
     }
   ],
   "profile": {
