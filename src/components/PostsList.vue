@@ -2,9 +2,12 @@
 import {defineComponent} from "vue";
 import {usePostsStore} from "@/stores/PostsStore";
 import type {Post} from "@/constants/Models";
+import PostCard from "@/components/Post.vue";
+
 
 export default defineComponent({
   name: "posts-list",
+  components: {PostCard},
   data() {
     return {
       postsStore: usePostsStore(),
@@ -23,20 +26,15 @@ export default defineComponent({
 <template>
    <div class="posts">
   <div v-for="post in posts"  :key="post.id">
-    <v-card :title="post.title" :subtitle="post.body" text="...">
-      <v-card-actions>
-        <v-btn>Click me</v-btn>
-      </v-card-actions>
-    </v-card>
+    <post-card :post="post"/>
    </div>
   </div>
 </template>
 
-<style scoped>
-.posts{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 20px;
-}
+<style lang="sass" scoped>
+.posts
+  display: flex
+  flex-wrap: wrap
+  flex-direction: row
+  gap: 20px
 </style>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="212px" height="212px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>la-poste-colissimo</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="la-poste-colissimo" fill-rule="nonzero">
+            <path d="M512,472 C512,494.1 494.1,512 472,512 L40,512 C17.9,512 0,494.1 0,472 L0,40 C0,17.9 17.9,0 40,0 L472,0 C494.1,0 512,17.9 512,40 L512,472 Z" id="Path" fill="#FFEA31"></path>
+            <text id="La-Poste" fill="#133F8A" font-family="Helvetica" font-size="81" font-weight="normal">
+                <tspan x="96" y="277">La Poste</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
