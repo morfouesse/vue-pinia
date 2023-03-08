@@ -2,7 +2,7 @@
 import {defineComponent} from "vue";
 import {usePostsStore} from "@/stores/PostsStore";
 import type {Post} from "@/constants/Models";
-import PostCard from "@/components/Post.vue";
+import PostCard from "@/components/PostCard.vue";
 
 
 export default defineComponent({
@@ -36,5 +36,6 @@ export default defineComponent({
   display: flex
   flex-wrap: wrap
   flex-direction: row
-  gap: 20px
+  justify-content: center
+  gap: 16px
 </style>

@@ -36,7 +36,7 @@ export default defineComponent({
               size="125"
               rounded="0"
           >
-            <v-img src="src/assets/logo.svg"></v-img>
+            <v-img src="../src/assets/logo.svg"></v-img>
           </v-avatar>
         </div>
       </div>

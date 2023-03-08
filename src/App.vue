@@ -1,20 +1,42 @@
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
-import NavBar from "@/components/Navbar.vue";
+import SideBar from "@/components/SideBar.vue";
+import {UtilsService} from "@/services/Utils.services";
+import {ScreenType} from "@/constants/Enums";
+import NavBar from "@/NavBar.vue";
 
+const utilsSvc = new UtilsService();
 export default defineComponent({
-  components: {NavBar}
+  computed: {
+    ScreenType() {
+      return ScreenType
+    }
+  },
+  components: {NavBar, SideBar},
+  data() {
+    return {
+      screenType: utilsSvc.useBreakpoints()
+    }
+  }
 })
 </script>
 
 <template>
-  <div class="page">
-    <v-card elevation="0">
+  <div>
+    <div v-if="screenType === ScreenType.XS">
+      <nav-bar/>
+      <main>
+        <RouterView></RouterView>
+      </main>
+    </div>
+    <v-card v-else elevation="0">
       <v-layout>
-        <NavBar></NavBar>
-        <v-main class="main">
+        <div>
+          <side-bar></side-bar>
+        </div>
+        <v-main>
           <v-container fluid>
-            <RouterView class="space"></RouterView>
+            <RouterView></RouterView>
           </v-container>
         </v-main>
       </v-layout>
@@ -22,8 +44,3 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang="sass" scoped>
-  .main
-    margin: 0 5px 0 5px
-
-</style>

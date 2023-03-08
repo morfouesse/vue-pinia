@@ -3,7 +3,7 @@ import {defineComponent} from "vue";
 import {RoutePath} from "@/constants/RoutePath";
 
 export default defineComponent({
-  name: "nav-bar",
+  name: "side-bar",
   methods:{
     goToPosts(): void{
       this.$router.push(RoutePath.POSTS);

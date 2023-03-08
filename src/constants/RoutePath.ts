@@ -1,6 +1,6 @@
 export enum RoutePath {
   POSTS = '/posts',
+  POST = '/post/:post',
   HOME = '/',
-  ABOUT = '/about',
   EDIT_POST = '/editPost/:post'
 }
