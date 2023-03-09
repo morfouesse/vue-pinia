@@ -1,19 +1,18 @@
 import { defineStore } from 'pinia'
 import { PostsService } from '@/services/Posts.service'
 import type { Post } from '@/constants/Models'
-import { ref } from 'vue'
 
 const postsSvc = new PostsService()
 export const usePostsStore = defineStore('postsStore', {
   state: () => ({
     posts: [] as Post[],
-    post: ref<Post>().value
+    post: {} as Post
   }),
   getters: {
-    getPosts(state) {
+    getPosts(state): Post[] {
       return state.posts
     },
-    getPost(state) {
+    getPost(state): Post {
       return state.post
     }
   },

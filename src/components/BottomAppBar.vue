@@ -37,7 +37,7 @@ export default defineComponent({
 });
 </script>
 <template>
-  <v-layout class="overflow-visible">
+  <v-layout>
     <v-bottom-navigation
         v-model="selected"
         mode="shift"
