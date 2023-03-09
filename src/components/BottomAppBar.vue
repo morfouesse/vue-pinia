@@ -40,7 +40,7 @@ export default defineComponent({
   <v-layout class="overflow-visible">
     <v-bottom-navigation
         v-model="selected"
-        grow
+        mode="shift"
     >
       <v-btn :value="bottomAppList[0]">
         <v-icon icon="home"></v-icon>
