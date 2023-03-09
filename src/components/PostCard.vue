@@ -74,6 +74,7 @@ export default defineComponent({
 .flip-card
   width: 350px
   height: 197px
+  cursor: pointer
 
   .flip-card-inner
     position: relative
@@ -109,7 +110,7 @@ export default defineComponent({
         width: 350px
         height: 198px
 
-.flip-card:hover .flip-card-inner
+.flip-card:active .flip-card-inner
   transform: rotateY(180deg)
 
 .flip-card-front, .flip-card-back
