@@ -18,7 +18,7 @@ export default defineComponent({
         {{ post.title }}
       </v-card-title>
       <div class="inside-card">
-        <div class="flex">
+        <div class="subtitle-actions-buttons">
           <div>
             <v-card-subtitle class="subtitle">{{ post.body }}</v-card-subtitle>
           </div>
@@ -60,7 +60,7 @@ export default defineComponent({
     display: flex
     flex-wrap: nowrap
     justify-content: space-between
-    .flex
+    .subtitle-actions-buttons
       display: flex
       flex-direction: column
       justify-content: space-between
