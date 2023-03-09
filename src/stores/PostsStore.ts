@@ -12,6 +12,9 @@ export const usePostsStore = defineStore('postsStore', {
   getters: {
     getPosts(state) {
       return state.posts
+    },
+    getPost(state) {
+      return state.post
     }
   },
   actions: {

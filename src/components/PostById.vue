@@ -2,6 +2,7 @@
 import {defineComponent} from "vue";
 import {usePostsStore} from "@/stores/PostsStore";
 import PostCard from "@/components/PostCard.vue";
+import {RoutePath} from "@/constants/RoutePath";
 
 export default defineComponent({
   name: "post-by-id",
@@ -10,12 +11,18 @@ export default defineComponent({
     return{
       postsStore: usePostsStore(),
     }
+  },
+  created() {
+    if(!this.postsStore.getPost){
+      console.log(this.postsStore.getPost)
+      this.$router.push(RoutePath.POSTS);
+    }
   }
 });
 </script>
 <template>
-  <div class="post">
-<post-card :post="postsStore.post"></post-card>
+  <div class="post" v-if="postsStore.getPost">
+<post-card :post="postsStore.getPost"></post-card>
   </div>
 </template>
 

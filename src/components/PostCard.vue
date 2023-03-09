@@ -1,10 +1,13 @@
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, type PropType} from "vue";
+import type {Post} from "@/constants/Models";
 
 export default defineComponent({
   name: 'post-card',
   props: {
-    post: {}
+    post: {
+      type: Object as PropType<Post>
+    }
   }
 });
 </script>

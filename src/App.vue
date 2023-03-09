@@ -3,7 +3,7 @@ import {defineComponent} from "vue";
 import SideBar from "@/components/SideBar.vue";
 import {UtilsService} from "@/services/Utils.services";
 import {ScreenType} from "@/constants/Enums";
-import NavBar from "@/NavBar.vue";
+import BottomAppBar from "@/components/BottomAppBar.vue";
 
 const utilsSvc = new UtilsService();
 export default defineComponent({
@@ -12,7 +12,7 @@ export default defineComponent({
       return ScreenType
     }
   },
-  components: {NavBar, SideBar},
+  components: {BottomAppBar, SideBar},
   data() {
     return {
       screenType: utilsSvc.useBreakpoints()
@@ -24,7 +24,7 @@ export default defineComponent({
 <template>
   <div>
     <div v-if="screenType === ScreenType.XS">
-      <nav-bar/>
+      <bottom-app-bar/>
       <main>
         <RouterView></RouterView>
       </main>
