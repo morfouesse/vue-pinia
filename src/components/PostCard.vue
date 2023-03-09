@@ -18,20 +18,24 @@ export default defineComponent({
         {{ post.title }}
       </v-card-title>
       <div class="inside-card">
-        <div>
-          <v-card-subtitle>{{ post.body }}</v-card-subtitle>
-          <v-card-actions class="actions">
-            <v-btn
-                class="btn"
-                icon="edit"
-                variant="text"
-            ></v-btn>
-            <v-btn
-                class="btn"
-                icon="delete"
-                variant="text"
-            ></v-btn>
-          </v-card-actions>
+        <div class="flex">
+          <div>
+            <v-card-subtitle class="subtitle">{{ post.body }}</v-card-subtitle>
+          </div>
+          <div>
+            <v-card-actions class="actions">
+              <v-btn
+                  class="btn"
+                  icon="edit"
+                  variant="text"
+              ></v-btn>
+              <v-btn
+                  class="btn"
+                  icon="delete"
+                  variant="text"
+              ></v-btn>
+            </v-card-actions>
+          </div>
         </div>
         <div>
           <v-avatar
@@ -52,13 +56,17 @@ export default defineComponent({
   width: 350px
   background: rgb(166, 9, 9)
   background: linear-gradient(90deg, rgba(166, 9, 9, 1) 38%, rgba(255, 0, 0) 100%)
-
   .inside-card
     display: flex
     flex-wrap: nowrap
     justify-content: space-between
-    .actions
-      padding-top: 58px
-      .btn
-        margin-top: 15px
+    .flex
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      .subtitle
+        word-wrap: break-word
+        white-space: normal
+        width: 200px
+        height: 85px
 </style>
