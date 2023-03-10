@@ -9,7 +9,7 @@ const utilsSvc = new UtilsService();
 export default defineComponent({
   computed: {
     ScreenType() {
-      return ScreenType
+      return ScreenType;
     }
   },
   components: {BottomAppBar, SideBar},
@@ -23,7 +23,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <div v-if="screenType === ScreenType.XS">
+    <div v-if="screenType !== ScreenType.LG">
       <bottom-app-bar/>
       <main>
         <RouterView></RouterView>

@@ -2,6 +2,7 @@
 import {defineComponent, type PropType} from "vue";
 import type {Post} from "@/constants/Models";
 import {UtilsService} from "@/services/Utils.services";
+import {usePostsStore} from "@/stores/PostsStore";
 
 const utilsSvc = new UtilsService();
 export default defineComponent({
@@ -9,11 +10,20 @@ export default defineComponent({
   data(){
     return{
       url: utilsSvc.randomGif(),
+      postStore: usePostsStore(),
     }
   },
   props: {
     post: {
-      type: Object as PropType<Post>
+      type: Object as PropType<Post>,
+      required: true
+    }
+  },
+  methods:{
+    deletePost(): void{
+      if(this.post.id){
+      this.postStore.deletePost(this.post.id);
+      }
     }
   }
 });
@@ -39,6 +49,7 @@ export default defineComponent({
                       variant="text"
                   ></v-btn>
                   <v-btn
+                      @click="deletePost"
                       class="btn"
                       icon="delete"
                       variant="text"

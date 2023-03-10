@@ -3,24 +3,17 @@ import {defineComponent} from "vue";
 import {usePostsStore} from "@/stores/PostsStore";
 import type {Post} from "@/constants/Models";
 import PostCard from "@/components/PostCard.vue";
-import {UtilsService} from "@/services/Utils.services";
-import {ScreenType} from "@/constants/Enums";
 
-const utilsSvc = new UtilsService();
 export default defineComponent({
   name: "posts-list",
   components: {PostCard},
   data() {
     return {
-      screenType: utilsSvc.useBreakpoints(),
       postsStore: usePostsStore(),
       loading: true,
     }
   },
   computed: {
-    ScreenType() {
-      return ScreenType;
-    },
     posts(): Post[] {
       return this.postsStore.getPosts;
     }
@@ -43,7 +36,7 @@ export default defineComponent({
     <v-progress-circular indeterminate></v-progress-circular>
   </div>
   <div v-else>
-    <div class="posts" :style="screenType.value !== ScreenType.XS ? 'padding-bottom:75px;' : ''">
+    <div class="posts">
       <div v-for="post in posts" :key="post.id">
         <post-card :post="post"/>
       </div>
@@ -52,6 +45,11 @@ export default defineComponent({
 </template>
 
 <style lang="sass" scoped>
+@import "@/constants/main.sass"
+@mixin mobile-tablet()
+  @media screen and (max-width: map-get($breakpoints, tablet))
+    @content
+
 .loader
   display: flex
   justify-content: center
@@ -62,4 +60,6 @@ export default defineComponent({
   flex-direction: row
   justify-content: center
   gap: 16px
+  @include mobile-tablet
+    padding-bottom: 75px
 </style>

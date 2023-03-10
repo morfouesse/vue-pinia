@@ -21,6 +21,10 @@ export const usePostsStore = defineStore('postsStore', {
       await postsSvc.getPosts().then((posts) => {
         this.posts = posts.data
       })
+    },
+    async deletePost(id: number): Promise<void> {
+      await postsSvc.deletePostById(id)
+      await this.fetchPosts()
     }
   }
 })

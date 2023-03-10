@@ -18,7 +18,9 @@ export default defineComponent({
   },
   methods: {
     newSelectedPost(): void {
+      if(this.selectedPost){
       this.postsStore.post = this.selectedPost;
+      }
       this.$router.push({
         name: "post",
         params: {
@@ -30,11 +32,6 @@ export default defineComponent({
 });
 </script>
 <template>
-  <v-toolbar
-      class="toolbar"
-      title="Vous cherchez un post ?"
-      theme="dark"
-  ></v-toolbar>
       <v-autocomplete
           placeholder="post1..."
           :items="postsStore.getPosts"
@@ -47,9 +44,15 @@ export default defineComponent({
       ></v-autocomplete>
 </template>
 <style lang="sass" scoped>
-@import "@/constants/colors.sass"
-.toolbar
-  background-color: $red
+@import "@/constants/main.sass"
+@mixin mobile-tablet()
+  @media screen and (max-width: map-get($breakpoints, tablet))
+    @content
+
 .auto-complete
-  margin: 50px 20px 47px 20px
+  min-width: 300px
+  max-width: 400px
+  @include mobile-tablet
+    margin: 50px 20px 47px 20px
+
 </style>

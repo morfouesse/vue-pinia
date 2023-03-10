@@ -14,7 +14,6 @@ export default defineComponent({
   },
   created() {
     if(!this.postsStore.getPost){
-      console.log(this.postsStore.getPost)
       this.$router.push(RoutePath.POSTS);
     }
   }

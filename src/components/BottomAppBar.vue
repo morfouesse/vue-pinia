@@ -62,6 +62,11 @@ export default defineComponent({
         activator="parent"
     >
       <v-card>
+        <v-toolbar
+            class="toolbar"
+            title="Vous cherchez un post ?"
+            theme="dark"
+        ></v-toolbar>
         <auto-complete></auto-complete>
         <v-card-actions>
           <v-btn class="btn" block @click="dialog = false">Fermer</v-btn>
@@ -72,9 +77,11 @@ export default defineComponent({
 </template>
 
 <style lang="sass" scoped>
-@import "@/constants/colors.sass"
+@import "@/constants/main.sass"
 .v-dialog > .v-overlay__content > .v-card
-  height: 300px
+  align-items: center
+.toolbar
+  background-color: $red
 .btn
   color: $red
 </style>
