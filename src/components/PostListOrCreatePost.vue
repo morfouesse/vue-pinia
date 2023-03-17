@@ -4,56 +4,61 @@ import PostsList from "@/components/PostsList.vue";
 import EditAndCreatePost from "@/components/EditAndCreatePost.vue";
 import AutoComplete from "@/components/AutoComplete.vue";
 import {UtilsService} from "@/services/Utils.services";
-import {ScreenType} from "@/constants/Enums";
+import {ScreenType, SelectedChips} from "@/constants/Enums";
+import PostById from "@/components/PostById.vue";
 
 const utilsSvc = new UtilsService();
 export default defineComponent({
   name: "post-list-or-create-post",
-  computed: {
-    ScreenType() {
-      return ScreenType;
-    }
-  },
-  components: {AutoComplete, EditAndCreatePost, PostsList},
+  components: {PostById, AutoComplete, EditAndCreatePost, PostsList},
   data() {
     return {
       screenType: utilsSvc.useBreakpoints(),
-      selected: 0,
+      selected: SelectedChips.POST_LIST,
       component: "posts-list",
       chips: [
         // we need component name because we use KeepAlive component
         {label: "La liste des posts", value: "posts-list"},
-        {label: "Créer un post", value: "edit-and-create-post"},
+        {label: "Créer un post", value: "EditAndCreatePost"},
       ],
     }
   },
+  computed:{
+    ScreenType() {
+      return ScreenType;
+    },
+  },
   watch: {
     selected() {
-      if (this.selected === 0) {
-        this.component = this.chips[0].value;
+      if (this.selected === SelectedChips.POST_LIST) {
+        this.component = this.chips[SelectedChips.POST_LIST].value;
+      }else {
+        this.component = this.chips[SelectedChips.CREATE_POST].value;
       }
-      if (this.selected === 1) {
-        this.component = this.chips[1].value;
-      }
-    },
+    }
   },
 });
 </script>
 <template>
   <div class="chips">
-    <v-chip-group
-        selected-class="text-primary"
-        v-model="selected"
-    >
-      <v-chip v-for="chip in chips" :key="chip">{{ chip.label }}</v-chip>
-    </v-chip-group>
+    <div>
+      <v-chip-group
+          mandatory
+          selected-class="text-primary"
+          v-model="selected"
+      >
+        <v-chip v-for="chip in chips" :key="chip">{{ chip.label }}</v-chip>
+      </v-chip-group>
+    </div>
     <div v-if="screenType === ScreenType.LG">
       <auto-complete></auto-complete>
     </div>
   </div>
-  <KeepAlive include="edit-and-create-post">
-    <component :is="component"></component>
-  </KeepAlive>
+  <div>
+    <KeepAlive include="EditAndCreatePost">
+      <component :is="component" @selected-chips="(value) => selected = value"></component>
+    </KeepAlive>
+  </div>
 </template>
 
 

@@ -44,7 +44,7 @@ export default defineComponent({
       ></v-autocomplete>
 </template>
 <style lang="sass" scoped>
-@import "@/constants/main.sass"
+@import "@/constants/Main.sass"
 @mixin mobile-tablet()
   @media screen and (max-width: map-get($breakpoints, tablet))
     @content

@@ -77,7 +77,7 @@ export default defineComponent({
 </template>
 
 <style lang="sass" scoped>
-@import "@/constants/main.sass"
+@import "@/constants/Main.sass"
 .v-dialog > .v-overlay__content > .v-card
   align-items: center
 .toolbar

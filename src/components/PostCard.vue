@@ -17,6 +17,9 @@ export default defineComponent({
     post: {
       type: Object as PropType<Post>,
       required: true
+    },
+    diseableIcons:{
+      type: Boolean
     }
   },
   methods:{
@@ -47,12 +50,14 @@ export default defineComponent({
                       class="btn"
                       icon="edit"
                       variant="text"
+                      :disabled="diseableIcons"
                   ></v-btn>
                   <v-btn
                       @click="deletePost"
                       class="btn"
                       icon="delete"
                       variant="text"
+                      :disabled="diseableIcons"
                   ></v-btn>
                 </v-card-actions>
               </div>
@@ -122,6 +127,7 @@ export default defineComponent({
         height: 198px
 
 .flip-card:active .flip-card-inner
+  transition: 1s
   transform: rotateY(180deg)
 
 .flip-card-front, .flip-card-back

@@ -16,7 +16,7 @@ export default defineComponent({
 </template>
 
 <style lang="sass" scoped>
-@import "../constants/main"
+@import "../constants/Main"
 .title
   text-align: center
   font-size: 40px

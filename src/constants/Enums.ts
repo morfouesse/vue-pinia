@@ -1,5 +1,10 @@
 export enum ScreenType {
   LG = 'lg',
   MD = 'md',
-  XS = 'xs'
+  SM = 'sm'
+}
+
+export enum SelectedChips {
+  POST_LIST = 0,
+  CREATE_POST = 1
 }
