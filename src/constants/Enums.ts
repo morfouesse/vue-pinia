@@ -9,3 +9,9 @@ export enum SelectedChips {
   CREATE_POST = 1,
   POSTS_HISTORY = 2
 }
+
+export enum BottomAppList {
+  HOME = 'home',
+  POSTS = 'posts',
+  SEARCH = 'chercher'
+}

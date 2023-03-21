@@ -42,7 +42,7 @@ export default defineComponent({
   methods: {
     chipsNavigation(): void {
       switch (this.selected) {
-        //eslint chiant
+          //eslint chiant
         case SelectedChips.CREATE_POST:
           this.component = this.chips[SelectedChips.CREATE_POST].value;
           break;

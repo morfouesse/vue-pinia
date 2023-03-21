@@ -24,9 +24,9 @@ const postTitle = "Titre *";
 const postBody = "Description *";
 const postButton = computed(() => props.isEditPost ? "Modifier" : "Créer");
 const rules = [
-  (v: string) => !!v || 'Service name is required',
-  (v: string) =>
-      v.length <= 20 || 'Service name must be less than 20 characters',
+  (value: string) => !!value || 'Service name is required',
+  (value: string) =>
+      value.length <= 20 || 'Service name must be less than 20 characters',
 ];
 let post = computed(() => props.isEditPost ?
    postToEdit
@@ -36,10 +36,10 @@ let post = computed(() => props.isEditPost ?
       body: "",
       createdIn: "",
     });
-const isNotValid = computed(() => !post.value.title || !post.value.body);
+const isNotAValidForm = computed(() => !post.value.title || !post.value.body);
 
 function submitPost(event: Event): void {
-  if (!isNotValid.value) {
+  if (!isNotAValidForm.value) {
     post.value.createdIn = moment().format(utilsSvc.formatDateHourSecond());
     if (props.isEditPost) {
       postsStore.updatePost(post.value).then().catch().then(() => {

@@ -4,6 +4,7 @@ import {RoutePath} from "@/constants/RoutePath";
 import {usePostsStore} from "@/stores/PostsStore";
 import type {Post} from "@/constants/Models";
 import AutoComplete from "@/components/AutoComplete.vue";
+import {BottomAppList} from "@/constants/Enums";
 
 export default defineComponent({
   name: 'bottom-app-bar',
@@ -11,7 +12,7 @@ export default defineComponent({
   data() {
     return {
       selected: "",
-      bottomAppList: ["home", "posts", "chercher"],
+      bottomAppList: [BottomAppList.HOME, BottomAppList.POSTS, BottomAppList.SEARCH],
       dialog: false,
       selectedPost: ref<Post>().value,
       postsStore: usePostsStore(),
@@ -19,9 +20,9 @@ export default defineComponent({
   },
   watch: {
     selected() {
-      if (this.selected === this.bottomAppList[0]) {
+      if (this.selected === BottomAppList.HOME) {
         this.goToHome();
-      } else if (this.selected === this.bottomAppList[1] || this.selected === this.bottomAppList[2]) {
+      } else if (this.selected === BottomAppList.POSTS || this.selected === BottomAppList.SEARCH) {
         this.goToPosts();
       }
     }
