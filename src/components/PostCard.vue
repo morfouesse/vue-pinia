@@ -7,8 +7,8 @@ import {usePostsStore} from "@/stores/PostsStore";
 const utilsSvc = new UtilsService();
 export default defineComponent({
   name: 'post-card',
-  data(){
-    return{
+  data() {
+    return {
       url: utilsSvc.randomGif(),
       postStore: usePostsStore(),
     }
@@ -18,17 +18,26 @@ export default defineComponent({
       type: Object as PropType<Post>,
       required: true
     },
-    diseableIcons:{
+    diseableIcons: {
       type: Boolean
+    },
+    historyIcon: {
+      type: Boolean
+    },
+  },
+  emit: ["is-deleted-post"],
+  methods: {
+    deletePost(): void {
+      this.postStore.deletePost(this.post).then().catch().then(() => {
+        this.postStore.fetchPosts();
+        this.$emit("is-deleted-post", true);
+      });
+    },
+    undoPost(): void {
+      this.postStore.removePostHistory(this.post);
     }
   },
-  methods:{
-    deletePost(): void{
-      if(this.post.id){
-      this.postStore.deletePost(this.post.id);
-      }
-    }
-  }
+
 });
 </script>
 <template>
@@ -46,19 +55,29 @@ export default defineComponent({
               </div>
               <div>
                 <v-card-actions class="actions">
-                  <v-btn
-                      class="btn"
-                      icon="edit"
-                      variant="text"
-                      :disabled="diseableIcons"
-                  ></v-btn>
-                  <v-btn
-                      @click="deletePost"
-                      class="btn"
-                      icon="delete"
-                      variant="text"
-                      :disabled="diseableIcons"
-                  ></v-btn>
+                  <div v-if="!historyIcon">
+                    <v-btn
+                        class="btn"
+                        icon="edit"
+                        variant="text"
+                        :disabled="diseableIcons"
+                    ></v-btn>
+                    <v-btn
+                        @click="deletePost"
+                        class="btn"
+                        icon="delete"
+                        variant="text"
+                        :disabled="diseableIcons"
+                    ></v-btn>
+                  </div>
+                  <div v-else>
+                    <v-btn
+                        @click="undoPost"
+                        class="btn"
+                        icon="restore_from_trash"
+                        variant="text"
+                    ></v-btn>
+                  </div>
                 </v-card-actions>
               </div>
             </div>

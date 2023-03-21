@@ -6,7 +6,8 @@ const postsSvc = new PostsService()
 export const usePostsStore = defineStore('postsStore', {
   state: () => ({
     posts: [] as Post[],
-    post: {} as Post
+    post: {} as Post,
+    postsHistory: [] as Post[]
   }),
   getters: {
     getPosts(state): Post[] {
@@ -14,6 +15,9 @@ export const usePostsStore = defineStore('postsStore', {
     },
     getPost(state): Post {
       return state.post
+    },
+    getPostHistory(state): Post[] {
+      return state.postsHistory
     }
   },
   actions: {
@@ -25,9 +29,26 @@ export const usePostsStore = defineStore('postsStore', {
     async createPost(post: Post): Promise<void> {
       await postsSvc.postPost(post)
     },
-    async deletePost(id: number): Promise<void> {
-      await postsSvc.deletePostById(id)
-      await this.fetchPosts()
+    async deletePost(post: Post): Promise<void> {
+      this.addPostHistory(post)
+      await postsSvc.deletePostById(post.id!)
+    },
+    addPostHistory(post: Post): void {
+      this.postsHistory.push(post)
+    },
+    removePostHistory(post: Post) {
+      const postHistoryIndex = this.postsHistory.findIndex((value) => value === post)
+      this.postsHistory.splice(postHistoryIndex)
+      this.createPost(post)
+        .then()
+        .catch()
+        .then(() => {
+          this.fetchPosts().then()
+        })
     }
+  },
+  persist: {
+    storage: sessionStorage, // data in sessionStorage is cleared when the page session ends.
+    paths: ['post', 'postsHistory'] // state qu'ont persist
   }
 })

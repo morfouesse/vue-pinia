@@ -2,6 +2,7 @@
 import {defineComponent} from "vue";
 import PostsList from "@/components/PostsList.vue";
 import EditAndCreatePost from "@/components/EditAndCreatePost.vue";
+import PostsHistory from "@/components/PostsHistory.vue";
 import AutoComplete from "@/components/AutoComplete.vue";
 import {UtilsService} from "@/services/Utils.services";
 import {ScreenType, SelectedChips} from "@/constants/Enums";
@@ -10,7 +11,8 @@ import PostById from "@/components/PostById.vue";
 const utilsSvc = new UtilsService();
 export default defineComponent({
   name: "post-list-or-create-post",
-  components: {PostById, AutoComplete, EditAndCreatePost, PostsList},
+  // ne pas oublié d'importé le composant avec keepAlive !!
+  components: {PostById, AutoComplete, EditAndCreatePost, PostsHistory, PostsList},
   data() {
     return {
       screenType: utilsSvc.useBreakpoints(),
@@ -20,24 +22,41 @@ export default defineComponent({
         // we need component name because we use KeepAlive component
         {label: "La liste des posts", value: "posts-list"},
         {label: "Créer un post", value: "EditAndCreatePost"},
+        {label: "Historique des posts", value: "PostsHistory"}
       ],
     }
   },
-  computed:{
+  computed: {
+    SelectedChips() {
+      return SelectedChips
+    },
     ScreenType() {
       return ScreenType;
     },
   },
   watch: {
     selected() {
-      if (this.selected === SelectedChips.POST_LIST) {
-        this.component = this.chips[SelectedChips.POST_LIST].value;
-      }else {
-        this.component = this.chips[SelectedChips.CREATE_POST].value;
-      }
+      this.chipsNavigation();
     }
   },
-});
+  methods: {
+    chipsNavigation(): void {
+      switch (this.selected) {
+        //eslint chiant
+        case SelectedChips.CREATE_POST:
+          this.component = this.chips[SelectedChips.CREATE_POST].value;
+          break;
+        case SelectedChips.POST_LIST:
+          this.component = this.chips[SelectedChips.POST_LIST].value;
+          break;
+        case SelectedChips.POSTS_HISTORY:
+          this.component = this.chips[SelectedChips.POSTS_HISTORY].value;
+          break;
+      }
+    }
+  }
+})
+;
 </script>
 <template>
   <div class="chips">
@@ -55,8 +74,9 @@ export default defineComponent({
     </div>
   </div>
   <div>
+<!--      editAndCreatePot event selected-chips-->
     <KeepAlive include="EditAndCreatePost">
-      <component :is="component" @selected-chips="(value) => selected = value"></component>
+      <component :is="component" @selected-chips="(value) => {if(SelectedChips.CREATE_POST){selected = value}}"></component>
     </KeepAlive>
   </div>
 </template>

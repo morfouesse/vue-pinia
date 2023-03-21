@@ -33,9 +33,10 @@ const emit = defineEmits(["selected-chips"]);
 function submitPost(event:Event): void {
   if (!isNotValided.value) {
     post.createdIn = moment().format(utilsSvc.formatDateHourSecond());
-    postsStore.createPost(post);
-    event.preventDefault();
-    emit("selected-chips", SelectedChips.POST_LIST)
+    postsStore.createPost(post).then().catch().then(() => {
+      emit("selected-chips", SelectedChips.POST_LIST)
+    });
+      event.preventDefault();
   }
   form.value?.reset();
 }

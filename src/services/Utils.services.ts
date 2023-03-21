@@ -25,7 +25,8 @@ export class UtilsService {
       '../src/assets/theOffice/the_office_2.gif',
       '../src/assets/theOffice/the_office_3.gif',
       '../src/assets/theOffice/the_office_4.gif',
-      '../src/assets/theOffice/the_office_5.gif'
+      '../src/assets/theOffice/the_office_5.gif',
+      '../src/assets/theOffice/the_office_6.gif'
     ]
     return gifList[Math.floor(Math.random() * gifList.length)]
   }

@@ -6,5 +6,6 @@ export enum ScreenType {
 
 export enum SelectedChips {
   POST_LIST = 0,
-  CREATE_POST = 1
+  CREATE_POST = 1,
+  POSTS_HISTORY = 2
 }

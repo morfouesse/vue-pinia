@@ -9,7 +9,8 @@ export default defineComponent({
   components: {PostCard},
   data() {
     return {
-      postsStore: usePostsStore(),
+      post: usePostsStore().getPost,
+      isDeletedPost: false,
       postsLink: [
         {
           title: "La liste des posts",
@@ -23,17 +24,19 @@ export default defineComponent({
       ]
     }
   },
-  created() {
-    if (!this.postsStore.getPost || this.postsStore.getPosts.length === 0) {
-      this.$router.push(RoutePath.POSTS);
+  watch:{
+    isDeletedPost(){
+      if (this.isDeletedPost) {
+        this.$router.push(RoutePath.POSTS);
+      }
     }
-  }
+  },
 });
 </script>
 <template>
-  <div class="post" v-if="postsStore.getPost">
+  <div class="post" v-if="post">
     <v-breadcrumbs :items="postsLink"></v-breadcrumbs>
-    <post-card :post="postsStore.getPost"></post-card>
+    <post-card @is-deleted-post="(value) => isDeletedPost = value" :post="post"></post-card>
   </div>
 </template>
 
