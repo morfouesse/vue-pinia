@@ -29,6 +29,16 @@ export const usePostsStore = defineStore('postsStore', {
     async createPost(post: Post): Promise<void> {
       await postsSvc.postPost(post)
     },
+    async updatePost(post: Post): Promise<void> {
+      await postsSvc.putPost(post).then((post) => {
+        this.post = post.data
+      })
+    },
+    async fetchPostById(id: number): Promise<void> {
+      await postsSvc.getPostById(id).then((post) => {
+        this.post = post.data
+      })
+    },
     async deletePost(post: Post): Promise<void> {
       this.addPostHistory(post)
       await postsSvc.deletePostById(post.id!)

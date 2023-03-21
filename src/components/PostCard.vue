@@ -3,6 +3,7 @@ import {defineComponent, type PropType} from "vue";
 import type {Post} from "@/constants/Models";
 import {UtilsService} from "@/services/Utils.services";
 import {usePostsStore} from "@/stores/PostsStore";
+import {RoutePath} from "@/constants/RoutePath";
 
 const utilsSvc = new UtilsService();
 export default defineComponent({
@@ -18,7 +19,7 @@ export default defineComponent({
       type: Object as PropType<Post>,
       required: true
     },
-    diseableIcons: {
+    disableIcons: {
       type: Boolean
     },
     historyIcon: {
@@ -27,6 +28,11 @@ export default defineComponent({
   },
   emit: ["is-deleted-post"],
   methods: {
+    editPost(): void{
+      this.postStore.fetchPostById(this.post.id!).then().catch().then(() => {
+      this.$router.push(RoutePath.EDIT_POST.replace(":post",String(this.post.id)));
+      });
+    },
     deletePost(): void {
       this.postStore.deletePost(this.post).then().catch().then(() => {
         this.postStore.fetchPosts();
@@ -57,17 +63,18 @@ export default defineComponent({
                 <v-card-actions class="actions">
                   <div v-if="!historyIcon">
                     <v-btn
+                        @click="editPost"
                         class="btn"
                         icon="edit"
                         variant="text"
-                        :disabled="diseableIcons"
+                        :disabled="disableIcons"
                     ></v-btn>
                     <v-btn
                         @click="deletePost"
                         class="btn"
                         icon="delete"
                         variant="text"
-                        :disabled="diseableIcons"
+                        :disabled="disableIcons"
                     ></v-btn>
                   </div>
                   <div v-else>

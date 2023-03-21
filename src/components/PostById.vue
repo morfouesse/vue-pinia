@@ -3,10 +3,16 @@ import {defineComponent} from "vue";
 import {usePostsStore} from "@/stores/PostsStore";
 import PostCard from "@/components/PostCard.vue";
 import {RoutePath} from "@/constants/RoutePath";
+import EditAndCreatePost from "@/components/EditAndCreatePost.vue";
 
 export default defineComponent({
   name: "post-by-id",
-  components: {PostCard},
+  computed: {
+    editPostRoute(): boolean {
+      return this.$router.currentRoute.value.path === RoutePath.EDIT_POST.replace(":post",String(this.post.id));
+    }
+  },
+  components: {EditAndCreatePost, PostCard},
   data() {
     return {
       post: usePostsStore().getPost,
@@ -36,7 +42,12 @@ export default defineComponent({
 <template>
   <div class="post" v-if="post">
     <v-breadcrumbs :items="postsLink"></v-breadcrumbs>
+    <div v-if="editPostRoute">
+    <edit-and-create-post :is-edit-post="true"></edit-and-create-post>
+    </div>
+    <div v-else>
     <post-card @is-deleted-post="(value) => isDeletedPost = value" :post="post"></post-card>
+    </div>
   </div>
 </template>
 

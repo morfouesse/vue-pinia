@@ -1,42 +1,56 @@
 <script setup lang="ts">
 
 import {computed, ref} from "vue";
-import type {Post} from "@/constants/Models";
 import moment from "moment";
 import PostCard from "@/components/PostCard.vue";
 import {UtilsService} from "@/services/Utils.services";
 import {usePostsStore} from "@/stores/PostsStore";
 import {SelectedChips} from "@/constants/Enums";
+import router from "@/router";
+import {RoutePath} from "@/constants/RoutePath";
 
 const utilsSvc = new UtilsService();
 
-const diseableIcons = true;
+const emit = defineEmits(["selected-chips"]);
+const props = defineProps<{
+  isEditPost?: boolean
+}>()
+
+const disableIcons = true;
 const form = ref<HTMLFormElement>();
 const postsStore = usePostsStore();
+const postToEdit = postsStore.getPost;
 const postTitle = "Titre *";
 const postBody = "Description *";
-const postButton = "Créer";
-const isNotValided = computed(() => !post.title || !post.body);
+const postButton = computed(() => props.isEditPost ? "Modifier" : "Créer");
 const rules = [
   (v: string) => !!v || 'Service name is required',
   (v: string) =>
       v.length <= 20 || 'Service name must be less than 20 characters',
 ];
-let post = ref<Post>({
-  title: "",
-  body: "",
-  createdIn: "",
-}).value;
-
-const emit = defineEmits(["selected-chips"]);
-
-function submitPost(event:Event): void {
-  if (!isNotValided.value) {
-    post.createdIn = moment().format(utilsSvc.formatDateHourSecond());
-    postsStore.createPost(post).then().catch().then(() => {
-      emit("selected-chips", SelectedChips.POST_LIST)
+let post = computed(() => props.isEditPost ?
+   postToEdit
+    :
+    {
+      title: "",
+      body: "",
+      createdIn: "",
     });
-      event.preventDefault();
+const isNotValid = computed(() => !post.value.title || !post.value.body);
+
+function submitPost(event: Event): void {
+  if (!isNotValid.value) {
+    post.value.createdIn = moment().format(utilsSvc.formatDateHourSecond());
+    if (props.isEditPost) {
+      postsStore.updatePost(post.value).then().catch().then(() => {
+       router.push(RoutePath.POSTS);
+      });
+    } else {
+      postsStore.createPost(post.value).then().catch().then(() => {
+        emit("selected-chips", SelectedChips.POST_LIST)
+      });
+    }
+    event.preventDefault();
   }
   form.value?.reset();
 }
@@ -83,7 +97,7 @@ function submitPost(event:Event): void {
         </div>
       </v-form>
     </div>
-    <post-card :post="post" :diseable-icons="diseableIcons"></post-card>
+    <post-card :post="post" :disable-icons="disableIcons"></post-card>
   </div>
 </template>
 
