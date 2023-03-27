@@ -10,7 +10,7 @@ import PostById from "@/components/PostById.vue";
 
 const utilsSvc = new UtilsService();
 export default defineComponent({
-  name: "post-list-or-create-post",
+  name: "chips-navigation",
   // ne pas oublié d'importé le composant avec keepAlive !!
   components: {PostById, AutoComplete, EditAndCreatePost, PostsHistory, PostsList},
   data() {

@@ -1,14 +1,11 @@
 <script lang="ts">
 import {defineComponent} from "vue";
-import PageTitle from "@/views/PageTitle.vue";
-import PostListOrCreatePost from "@/components/PostListOrCreatePost.vue";
+import PageTitle from "@/components/PageTitle.vue";
+import ChipsNavigation from "@/components/ChipsNavigation.vue";
 
 export default defineComponent({
   name: "posts-view",
-  computed: {
-
-  },
-  components: {PostListOrCreatePost, PageTitle}
+  components: {ChipsNavigation, PageTitle}
 
 });
 </script>
@@ -17,7 +14,7 @@ export default defineComponent({
   <div class="post-view">
     <page-title title="les pooosts !"/>
     <div>
-      <post-list-or-create-post></post-list-or-create-post>
+      <chips-navigation></chips-navigation>
     </div>
   </div>
 </template>

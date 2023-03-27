@@ -1,6 +1,6 @@
 <script lang="ts">
 import {defineComponent} from "vue";
-import PageTitle from "@/views/PageTitle.vue";
+import PageTitle from "@/components/PageTitle.vue";
 import PostById from "@/components/PostById.vue";
 
 export default defineComponent({

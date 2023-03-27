@@ -62,4 +62,5 @@ export default defineComponent({
   gap: 16px
   @include mobile-tablet
     padding-bottom: 75px
+
 </style>

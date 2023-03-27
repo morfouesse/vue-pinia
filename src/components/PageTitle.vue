@@ -19,8 +19,10 @@ export default defineComponent({
 @import "../constants/Main"
 .title
   text-align: center
-  font-size: 40px
+  font-size: 58px
   font-weight: bold
   color: $red
   margin-bottom: 30px
+  filter: drop-shadow(5px 1px 44px red)
+
 </style>
