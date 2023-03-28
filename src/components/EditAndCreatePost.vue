@@ -8,6 +8,7 @@ import {usePostsStore} from "@/stores/PostsStore";
 import {SelectedChips} from "@/constants/Enums";
 import router from "@/router";
 import {RoutePath} from "@/constants/RoutePath";
+import type {Post} from "@/constants/Models";
 
 const utilsSvc = new UtilsService();
 
@@ -19,7 +20,7 @@ const props = defineProps<{
 const disableIcons = true;
 const form = ref<HTMLFormElement>();
 const postsStore = usePostsStore();
-const postToEdit = postsStore.getPost;
+const postToEdit = ref<Post>(postsStore.getPost);
 const postTitle = "Titre *";
 const postBody = "Description *";
 const postButton = computed(() => props.isEditPost ? "Modifier" : "Créer");
@@ -28,10 +29,10 @@ const rules = [
   (value: string) =>
       value.length <= 20 || 'Service name must be less than 20 characters',
 ];
-let post = computed(() => props.isEditPost ?
+let post =  props.isEditPost ?
    postToEdit
     :
-    {
+    ref<Post>({
       title: "",
       body: "",
       createdIn: "",

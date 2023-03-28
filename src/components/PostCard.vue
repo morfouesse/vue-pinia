@@ -153,7 +153,7 @@ export default defineComponent({
         height: 198px
 
 .flip-card:active .flip-card-inner
-  transition: 1s
+  transition: 1300ms
   transform: rotateY(180deg)
 
 .flip-card-front, .flip-card-back
